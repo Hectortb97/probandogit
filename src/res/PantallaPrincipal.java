@@ -1,7 +1,10 @@
 package res;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import logica.Logica;
@@ -111,14 +114,64 @@ public class PantallaPrincipal extends Application {
         radioButton2.setToggleGroup(radioGroup);
         radioButton3.setToggleGroup(radioGroup);
 
+        radioButton1.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+                if (isNowSelected) {
+                    ObservableList<Partido> primera = FXCollections.observableArrayList();
+                    for (Partido p : Logica.getInstance().getListaPartidos()) {
+                        if(p.getDivision().equalsIgnoreCase("Primera"))
+                            primera.add(p);
+                    }
+                    tableView.getItems().clear();
+                    tableView.getItems().addAll(primera);
+
+                }
+            }
+        });
+
+        radioButton2.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+                if (isNowSelected) {
+                    ObservableList<Partido> segunda = FXCollections.observableArrayList();
+                    for (Partido p : Logica.getInstance().getListaPartidos()) {
+                        if(p.getDivision().equalsIgnoreCase("Segunda"))
+                            segunda.add(p);
+                    }
+                    tableView.getItems().clear();
+                    tableView.getItems().addAll(segunda);
+
+                } else {
+                    // ...
+                }
+            }
+        });
+
+        radioButton3.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+                if (isNowSelected) {
+                    ObservableList<Partido> tercera = FXCollections.observableArrayList();
+                    for (Partido p : Logica.getInstance().getListaPartidos()) {
+                        if(p.getDivision().equalsIgnoreCase("Tercera"))
+                            tercera.add(p);
+                    }
+                    tableView.getItems().clear();
+                    tableView.getItems().addAll(tercera);
+
+                } else {
+                    // ...
+                }
+            }
+        });
+
         AnchorPane.setBottomAnchor(radioButton1,15d);
         AnchorPane.setLeftAnchor(radioButton1,150d);
         AnchorPane.setBottomAnchor(radioButton2,15d);
         AnchorPane.setLeftAnchor(radioButton2,220d);
         AnchorPane.setBottomAnchor(radioButton3,15d);
         AnchorPane.setLeftAnchor(radioButton3,290d);
-
-
 
         Button borrar = new Button("Borrar");
 
@@ -149,6 +202,8 @@ public class PantallaPrincipal extends Application {
         });
 
         AnchorPane anchorPane = new AnchorPane(tableView,alta,modificar,radioButton1,radioButton2,radioButton3,borrar);
+
+        stage.getIcons().add(new Image("pelota.png"));
         Scene scene = new Scene(anchorPane, 430, 300);
         stage.setScene(scene);
         stage.show();

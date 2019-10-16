@@ -53,7 +53,7 @@ public class PantallaAlta extends Stage {
         local.setText(partido.getLocal());
 
         visitante.setText(partido.getVisitante());
-
+        //Pone en ek CBox la division adecuada
         if(partido.getDivision().equalsIgnoreCase("Primera"))
             division.getSelectionModel().select(0);
         else
@@ -150,13 +150,13 @@ public class PantallaAlta extends Stage {
         fecha.setMaxWidth(100);
         vboxDatos.getChildren().add(fecha);
 
-        vboxDatos.setPadding(new Insets(10));
+        vboxDatos.setPadding(new Insets(11));
 
         botonAceptar = new Button("Aceptar");
 
-        botonAceptar.setPadding(new Insets(10));
+        botonAceptar.setPadding(new Insets(11));
         vboxLabels.getChildren().add(botonAceptar);
-
+        vboxLabels.setPadding(new Insets(11));
         hboxPrin.getChildren().addAll(vboxLabels,vboxDatos);
 
         Scene scenaAlta = new Scene(hboxPrin, 400, 300);

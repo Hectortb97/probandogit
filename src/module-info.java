@@ -1,4 +1,4 @@
-module OpenJFX {
+module HectorTelladoOpenJFX {
     requires javafx.base;
     requires javafx.controls;
     requires java.desktop;
